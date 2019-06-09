@@ -1,8 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script|ZCOOL+KuaiLe&display=swap');
 
+*{
+    box-sizing: border-box;
+    font-family: 'Nanum Pen Script', cursive;
+}
+html,body{
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+body{
+    background: url("../images/background.png");
+}
+h1 {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    margin: 2px auto;
+    text-shadow: 2px 2px #656262;
+    text-align:center;
+}
+
+.characteres{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 10px auto;
+    width: 650px;
+}
+.enemies-wrap{
+    display: none;
+    justify-self: right;
+}
 
 .selection, .enemies{
     display: flex;
-    align-items: center;   
+    align-items: center;
 }
 
 .section h3{
@@ -14,14 +46,14 @@
 }
 
 .battle{
-    /* background: url("../images/battle-scene.gif"); */
-    background-color: #2599a7;
-    border: 1px solid #2599a7;
-    height: 384px;
-    min-width: 50px;
+    background: url("../images/battle-scene.gif");
+    border: 5px solid #000;
+    border-radius: 10px;
+    height: 400px;
+    width: 650px;
     display: grid;
+    margin: 5px auto;
     grid-template-columns: 1fr 1fr 1fr;
-    
 }
 
 .battle-hp-left{
@@ -46,7 +78,6 @@
     height: 300px;
     justify-self: center;
     background-color:unset;
-    border-bottom: 3px solid #2599a7;
     display: none;
     
 }
@@ -130,14 +161,14 @@ img:hover{
 }
 
 .chosen {
-    background-color: #fff;
-    border-bottom: 3px solid #2599a7;
+
+    border: 0;
+    background-color: unset;
     
 }
 .chosen:hover{
-    background-color: #fff;
-    border-bottom: 3px solid #2599a7;
-    border-radius: 0;
+    background-color: unset;
+    border: 0;
     cursor: default;
 }
 

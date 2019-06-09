@@ -12,17 +12,24 @@
     <title>Word Guess Game - Hangman</title>
 </head>
 <body>
-    <div class="container-fluid mx-0 px-0 px-0">
-        <h3>Choose your character!</h3>
-        <div class="selection"></div>
+    <!-- <div class="container mx-0 px-0 px-0"> -->
+        <h1>Super Heros RPG</h1>
 
-        <h3>Choose your enemy!</h3>
-        <div class="enemies"></div>
+        <div class="characteres">
+            <div class="chosen-wrap">
+                <h3 id="text-choose-character">Choose your character!</h3>
+                <div class="selection"></div>
+            </div>
+            <div class="enemies-wrap">
+                <h3>Enemies Avaliable</h3>
+                <div class="enemies"></div>
+            </div>
+        </div>
 
-        <h3>Battle Field</h3>        
+
         <div class="battle">
             <div class="battle-hp-left">
-                <div class="progress-bar">
+                <div class="progress-bar shadow bg-white">
                     <div id="user-hp" class="hp-bar"></div>
                 </div>
                 <span id="battle-user" data-hp="" class="battle-hp-text">Player</span>
@@ -53,7 +60,7 @@
                 </footer>
             </div>
         </div> -->
-    </div>
+    <!-- </div> -->
     
     
     <script src="assets/javascript/game.js"></script>

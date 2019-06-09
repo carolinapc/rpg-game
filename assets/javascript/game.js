@@ -133,6 +133,8 @@ $(document).ready(function(){
         $("#btn-attack").css("display","none");
         $("#battle-msg").css("display","none");
         $("#battle-msg").text("");
+        $("#text-choose-character").text("Choose your character");
+        $(".enemies-wrap").css("display","none");
 
     }
 
@@ -170,6 +172,8 @@ $(document).ready(function(){
             }
 
             userStartHealth = characterChosen.healthPoints; 
+            $("#text-choose-character").text("You!");
+            $(".enemies-wrap").css("display","block");
     
         }
         
