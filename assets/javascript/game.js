@@ -75,13 +75,13 @@ $(document).ready(function(){
         battleStarted = true;
 
         $("#user-character").attr("src",characterChosen.picture);
-        $("#user-character").css("display","block");
+        $("#user-character").css("visibility","visible");
         $("#enemy-character").attr("src",enemyChosen.picture);
-        $("#enemy-character").css("display","block");
+        $("#enemy-character").css("visibility","visible");
         $("#battle-user").text(characterChosen.name);
         $("#battle-enemy").text(enemyChosen.name);
         $("#btn-attack").css("display","block");
-        $("#battle-msg").text("");
+        $("#battle-msg").text("Fight!");
         $("#battle-msg").css("display","block");
         enemyStartHealth = enemyChosen.healthPoints;
 
@@ -92,7 +92,7 @@ $(document).ready(function(){
     }
 
     function gameOver(){
-        $("#user-character").css("display","none");
+        $("#user-character").css("visibility","hidden");
         $("#user-hp").css("width", "0");
         $("#user-hp").text("0");
         $("#battle-msg").html("GAME OVER<br>Sorry... You Lost! Try again!");
@@ -103,7 +103,7 @@ $(document).ready(function(){
 
     function destroyEnemy(){
         var msg;
-        $("#enemy-character").css("display","none");
+        $("#enemy-character").css("visibility","hidden");
         $("#enemy-hp").css("width", "0");
         $("#enemy-hp").text("0");
         $("#btn-attack").css("display","none");
@@ -132,9 +132,12 @@ $(document).ready(function(){
         $("#btn-restart").css("display","none");
         $("#btn-attack").css("display","none");
         $("#battle-msg").css("display","none");
-        $("#battle-msg").text("");
+        $("#battle-msg").text("Fight!");
         $("#text-choose-character").text("Choose your character");
         $(".enemies-wrap").css("display","none");
+        $("#enemy-character").css("visibility","hidden");
+        $("#user-character").css("visibility","hidden");
+        
 
     }
 

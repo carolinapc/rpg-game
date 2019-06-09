@@ -54,31 +54,39 @@ h1 {
     display: grid;
     margin: 5px auto;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px auto;
 }
 
 .battle-hp-left{
     justify-self: left;
-    
+    display: grid;
+    grid-template-rows: 20px 30px;
 }
 .battle-hp-right{
     justify-self: right;
+    display: grid;
+    grid-template-rows: 20px 30px;
 }
 .battle-hp-center{
     justify-self: center;
     align-self: center;
+    color: white;
+    font-size: 24px;
+    padding-bottom: 20px;
 }
 
 .battle-hp-text {
     color: #fff;
     padding-bottom: 5px;
-    justify-self: center;
+    margin-left: 6px;
+    justify-self: left;
 }
 
 .battle-img {
     height: 300px;
     justify-self: center;
     background-color:unset;
-    display: none;
+    visibility: hidden;
     
 }
 
@@ -92,9 +100,11 @@ h1 {
     width: 150px;
     height: 20px;
     border: 1px solid #38c358;
+    border-radius: 5px;
     background-color: #c8c8c8;
     padding: 0;
     display: inline-block;
+    margin: 0 5px
 }
 
 .hp-bar{
@@ -135,10 +145,18 @@ h1 {
 }
 
 #battle-msg {
-    color: #fff;
+    color: #44f144;
     font-size: 20px;
     font-weight: bold;
     display: none;
+    background-color: black;
+    width: 650px;
+    height: 70px;
+    margin: 0 auto;
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 3px solid green;
+    text-align: center;
 }
 
 figure{
@@ -170,6 +188,11 @@ img:hover{
     background-color: unset;
     border: 0;
     cursor: default;
+}
+
+footer{
+    margin: 10px auto;
+    text-align: center;
 }
 
 
