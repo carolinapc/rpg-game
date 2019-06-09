@@ -4,12 +4,12 @@ $(document).ready(function(){
     var characters = [];
     var divSelection = $(".selection");
     var divEnemies = $(".enemies");
-    var divBattle = $(".battle");
     var characterChosen = {};
     var enemyChosen = {};
     var battleStarted = false;
     var enemyStartHealth;
     var userStartHealth;
+    var userStartAttack;
     var enemiesRemained;
     
 
@@ -28,8 +28,8 @@ $(document).ready(function(){
                 id: i,
                 name: charactersName[i].replace("-"," "),
                 healthPoints: getRandomValue(100,300),
-                attackPower: getRandomValue(1,10),
-                counterAttackPower: getRandomValue(20,70),
+                attackPower: getRandomValue(3,15),
+                counterAttackPower: getRandomValue(10,50),
                 picture: "assets/images/" + charactersName[i].toLocaleLowerCase() + ".png"
 
             };
@@ -43,6 +43,7 @@ $(document).ready(function(){
         figure.attr("id","figure-"+character.id);
 
         var caption = $("<figcaption>");
+        caption.attr("id","fig-caption-"+character.id)
         caption.html(character.name + "<br>HP: " + character.healthPoints);
 
         var img = $("<img>");
@@ -56,6 +57,27 @@ $(document).ready(function(){
 
     }
 
+    function addChosenData(){
+
+        var chosenCaption = $("#fig-caption-"+characterChosen.id);
+        
+        chosenCaption.html(characterChosen.name+"<br>");
+        var spanHP = $("<span>");
+        var spanAP = $("<span>");
+        spanHP.attr("id","data-chosen-hp");
+        spanHP.text(characterChosen.healthPoints);
+        spanAP.attr("id","data-chosen-ap");
+        spanAP.text(characterChosen.attackPower);
+
+        chosenCaption.append("HP: ");
+        chosenCaption.append(spanHP);
+        chosenCaption.append(" Attack: ");
+        chosenCaption.append(spanAP);
+        
+        
+
+    }
+
     function updateBattle(){
         //calculates the percentage of HP
         
@@ -66,7 +88,8 @@ $(document).ready(function(){
         $("#user-hp").css("width",pcUserHp.toString() + "%");
         $("#enemy-hp").text(enemyChosen.healthPoints);
         $("#user-hp").text(characterChosen.healthPoints);
-        
+        $("#data-chosen-hp").text(characterChosen.healthPoints);
+        $("#data-chosen-ap").text(characterChosen.attackPower);
 
     }
 
@@ -165,6 +188,8 @@ $(document).ready(function(){
             characterChosen = characters[choice]; //assign the character chosen into the global variable
             divSelection.empty(); //cleans the selection div
             addCharacterIntoDiv(divSelection, characters[choice]); //add character chosen into the selection div
+            addChosenData(); //add info about the chosen beside of chosen character
+            
             $("#"+choice).attr("class","chosen"); //applies the css class on the chosen
     
             //add all the enemies characters into enemy div
@@ -175,6 +200,7 @@ $(document).ready(function(){
             }
 
             userStartHealth = characterChosen.healthPoints; 
+            userStartAttack = characterChosen.attackPower;
             $("#text-choose-character").text("You!");
             $(".enemies-wrap").css("display","block");
     
@@ -210,7 +236,8 @@ $(document).ready(function(){
         
         $("#battle-msg").text("You attacked "+enemyChosen.name+" for "+characterChosen.attackPower+" damage.");
         //the user increases its power
-        characterChosen.attackPower += characterChosen.attackPower;
+        characterChosen.attackPower += userStartAttack;
+        updateBattle();
 
         //if the enemy loses all hp
         if(enemyChosen.healthPoints <= 0){ 
@@ -221,12 +248,11 @@ $(document).ready(function(){
             characterChosen.healthPoints -= enemyChosen.counterAttackPower;
             $("#battle-msg").html($("#battle-msg").text()+"<br>"+enemyChosen.name+" attacked you back for "+enemyChosen.counterAttackPower+" damage.");
 
+            updateBattle();
+
             //if the user loses all hp
             if(characterChosen.healthPoints <=0){ 
                 gameOver();
-            }
-            else {
-                updateBattle();
             }
 
         }
