@@ -1,0 +1,147 @@
+
+
+.selection, .enemies{
+    display: flex;
+    align-items: center;   
+}
+
+.section h3{
+    grid-column: 1/4;
+}
+
+.enemies figure {
+    border-color: 1px solid rgb(190, 83, 83);
+}
+
+.battle{
+    /* background: url("../images/battle-scene.gif"); */
+    background-color: #2599a7;
+    border: 1px solid #2599a7;
+    height: 384px;
+    min-width: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+}
+
+.battle-hp-left{
+    justify-self: left;
+    
+}
+.battle-hp-right{
+    justify-self: right;
+}
+.battle-hp-center{
+    justify-self: center;
+    align-self: center;
+}
+
+.battle-hp-text {
+    color: #fff;
+    padding-bottom: 5px;
+    justify-self: center;
+}
+
+.battle-img {
+    height: 300px;
+    justify-self: center;
+    background-color:unset;
+    border-bottom: 3px solid #2599a7;
+    display: none;
+    
+}
+
+.battle-img:hover{
+    background-color:unset;
+    cursor: default;
+}
+
+
+.progress-bar{
+    width: 150px;
+    height: 20px;
+    border: 1px solid #38c358;
+    background-color: #c8c8c8;
+    padding: 0;
+    display: inline-block;
+}
+
+.hp-bar{
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin:0;
+}
+
+#btn-attack{
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 50px;
+    background-color: darkred;
+    color: white;
+    display: none;
+}
+
+#btn-restart{
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 50px;
+    background-color: darkgreen;
+    color: white;
+    display: none;
+}
+
+#btn-attack:hover{
+    background-color: rgb(214, 46, 46);
+    font-weight: bold;
+}
+
+#battle-msg {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+}
+
+figure{
+    flex-wrap: wrap;
+    justify-self: center;
+}
+
+figcaption {
+    text-align: center;
+}
+
+img{
+    height: 150px;
+    cursor: pointer;
+}
+img:hover{
+    background-color: #2599a7;
+    border-color: #2599a7;
+    border-radius: 10px;
+}
+
+.chosen {
+    background-color: #fff;
+    border-bottom: 3px solid #2599a7;
+    
+}
+.chosen:hover{
+    background-color: #fff;
+    border-bottom: 3px solid #2599a7;
+    border-radius: 0;
+    cursor: default;
+}
+
+
+
+
+
