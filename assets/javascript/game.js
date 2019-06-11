@@ -13,6 +13,20 @@ $(document).ready(function(){
     var enemiesRemained;
     
 
+    function animateCSS(element, animationName, callback) {
+        const node = document.querySelector(element);
+        node.classList.add('animated', animationName);
+    
+        function handleAnimationEnd() {
+            node.classList.remove('animated', animationName);
+            node.removeEventListener('animationend', handleAnimationEnd);
+    
+            if (typeof callback === 'function') callback();
+        }
+    
+        node.addEventListener('animationend', handleAnimationEnd);
+    }
+
     //get random value between 2 values
     function getRandomValue(min, max) {
         min = Math.ceil(min);
@@ -83,10 +97,9 @@ $(document).ready(function(){
         
         var pcUserHp = (characterChosen.healthPoints / userStartHealth)*100;
         var pcEnemyHp = (enemyChosen.healthPoints / enemyStartHealth)*100;
-
-        $("#enemy-hp").css("width",pcEnemyHp.toString() + "%");
-        $("#user-hp").css("width",pcUserHp.toString() + "%");
+        $("#enemy-hp").animate({ width: pcEnemyHp.toString()+"%" });
         $("#enemy-hp").text(enemyChosen.healthPoints);
+        $("#user-hp").animate({ width: pcUserHp.toString()+"%" });
         $("#user-hp").text(characterChosen.healthPoints);
         $("#data-chosen-hp").text(characterChosen.healthPoints);
         $("#data-chosen-ap").text(characterChosen.attackPower);
@@ -95,14 +108,18 @@ $(document).ready(function(){
 
     //sets the characters and their atributes on the battle field and prepare to start the battle
     function startBattle(){
-        battleStarted = true;
 
+        battleStarted = true;
+        animateCSS('#user-character','bounceInDown');
         $("#user-character").attr("src",characterChosen.picture);
         $("#user-character").css("visibility","visible");
+        $("#battle-user").text(characterChosen.name);
+
+        animateCSS('#enemy-character','bounceInDown');
         $("#enemy-character").attr("src",enemyChosen.picture);
         $("#enemy-character").css("visibility","visible");
-        $("#battle-user").text(characterChosen.name);
         $("#battle-enemy").text(enemyChosen.name);
+        
         $("#btn-attack").css("display","block");
         $("#btn-attack").removeAttr("disabled");
         $("#battle-msg").text("Fight!");
@@ -116,36 +133,44 @@ $(document).ready(function(){
     }
 
     function gameOver(){
-        $("#user-character").css("visibility","hidden");
-        $("#user-hp").css("width", "0");
-        $("#user-hp").text("0");
-        $("#battle-msg").html("GAME OVER<br>Sorry... You Lost! Try again!");
-        $("#btn-restart").css("display","block");
-        $("#btn-attack").css("display","none");
+        animateCSS('#enemy-character', 'flip', function(){
+            animateCSS('#user-character','fadeOut');
+            $("#user-character").css("visibility","hidden");
+            $("#user-hp").css("width", "0");
+            $("#user-hp").text("0");
+            $("#battle-msg").html("GAME OVER<br>Sorry... You Lost! Try again!");
+            $("#btn-restart").css("display","block");
+            $("#btn-attack").css("display","none");
+        });
+        
         
     }
 
     function destroyEnemy(){
         var msg;
-        $("#enemy-character").css("visibility","hidden");
-        $("#enemy-hp").css("width", "0");
-        $("#enemy-hp").text("0");
-        $("#btn-attack").attr("disabled", "true");
+        animateCSS('#user-character', 'flip', function(){
+            animateCSS('#enemy-character','fadeOut');
+            $("#enemy-character").css("visibility","hidden");
+            $("#enemy-hp").css("width", "0");
+            $("#enemy-hp").text("0");
+            $("#btn-attack").attr("disabled", "true");
+    
+            //decrease the enemies remained
+            enemiesRemained--;
+    
+            if(enemiesRemained == 0){
+                msg = "<br>You won the Game!!!";
+                $("#btn-restart").css("display","block");
+                $("#btn-attack").css("display", "none");
+            }
+            else{
+                msg = "You defeated "+enemyChosen.name+" on this battle!<br> Choose another enemy to fight!";
+            }
+            $("#battle-msg").html("CONGRATULATIONS! "+msg);
+    
+            battleStarted = false;
+        });
 
-        //decrease the enemies remained
-        enemiesRemained--;
-
-        if(enemiesRemained == 0){
-            msg = "<br>You won the Game!!!";
-            $("#btn-restart").css("display","block");
-            $("#btn-attack").css("display", "none");
-        }
-        else{
-            msg = "You defeated "+enemyChosen.name+" on this battle!<br> Choose another enemy to fight!";
-        }
-        $("#battle-msg").html("CONGRATULATIONS! "+msg);
-
-        battleStarted = false;
     }
     
     function reset(){
@@ -163,6 +188,11 @@ $(document).ready(function(){
         $(".enemies-wrap").css("display","none");
         $("#enemy-character").css("visibility","hidden");
         $("#user-character").css("visibility","hidden");
+        $("#battle-user").text("Player");
+        $("#battle-enemy").text("Enemy");
+        $("#enemy-hp").animate({ width: "0" });
+        $("#user-hp").animate({ width: "0" });
+
         
 
     }
@@ -234,31 +264,51 @@ $(document).ready(function(){
     //when the user attacks the enemy
     $("#btn-attack").click(function(){
 
-        //the enemy loses health
-        enemyChosen.healthPoints -= characterChosen.attackPower;
-        
-        $("#battle-msg").text("You attacked "+enemyChosen.name+" for "+characterChosen.attackPower+" damage.");
-        //the user increases its power
-        characterChosen.attackPower += userStartAttack;
-        updateBattle();
-
-        //if the enemy loses all hp
-        if(enemyChosen.healthPoints <= 0){ 
-            destroyEnemy();
-        }
-        else{
-            //the user loses health with the counter attack of the enemy
-            characterChosen.healthPoints -= enemyChosen.counterAttackPower;
-            $("#battle-msg").html($("#battle-msg").text()+"<br>"+enemyChosen.name+" attacked you back for "+enemyChosen.counterAttackPower+" damage.");
+        //user attacks the enemy
+        animateCSS('#user-character', 'flip', function(){
+            //the enemy loses health
+            enemyChosen.healthPoints -= characterChosen.attackPower;
+            
+            $("#battle-msg").text("You attacked "+enemyChosen.name+" for "+characterChosen.attackPower+" damage.");
+            //the user increases its power
+            characterChosen.attackPower += userStartAttack;
 
             updateBattle();
 
-            //if the user loses all hp
-            if(characterChosen.healthPoints <=0){ 
-                gameOver();
+            //if the enemy loses all hp
+            if(enemyChosen.healthPoints <= 0){ 
+                destroyEnemy();
             }
+            else{
+                //animation: enemy shakes 
+                animateCSS('#enemy-character', 'shake', function(){
+                    //animation: enemy counter-attack
+                    animateCSS('#enemy-character', 'flip', function(){
+                        animateCSS('#user-character', 'shake');
+                        //the user loses health with the counter attack of the enemy
+                        characterChosen.healthPoints -= enemyChosen.counterAttackPower;
+                        if(characterChosen.healthPoint < 0) characterChosen.healthPoint = 0;
 
-        }
+                        $("#battle-msg").html($("#battle-msg").text()+"<br>"+enemyChosen.name+" attacked you back for "+enemyChosen.counterAttackPower+" damage.");
+
+                        updateBattle();
+
+                        //if the user loses all hp
+                        if(characterChosen.healthPoints <=0){ 
+                            gameOver();
+                        }
+
+                    });
+                    
+
+                });
+
+            }            
+    
+        });
+    
+       
+        
         
 
     });
