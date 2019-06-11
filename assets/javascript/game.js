@@ -104,6 +104,7 @@ $(document).ready(function(){
         $("#battle-user").text(characterChosen.name);
         $("#battle-enemy").text(enemyChosen.name);
         $("#btn-attack").css("display","block");
+        $("#btn-attack").removeAttr("disabled");
         $("#battle-msg").text("Fight!");
         $("#battle-msg").css("display","block");
         enemyStartHealth = enemyChosen.healthPoints;
@@ -129,19 +130,20 @@ $(document).ready(function(){
         $("#enemy-character").css("visibility","hidden");
         $("#enemy-hp").css("width", "0");
         $("#enemy-hp").text("0");
-        $("#btn-attack").css("display","none");
+        $("#btn-attack").attr("disabled", "true");
 
         //decrease the enemies remained
         enemiesRemained--;
 
         if(enemiesRemained == 0){
-            msg = "You won the Game!!!";
+            msg = "<br>You won the Game!!!";
             $("#btn-restart").css("display","block");
+            $("#btn-attack").css("display", "none");
         }
         else{
-            msg = "You've defeated "+enemyChosen.name+" on this battle!!! You can choose another enemy to fight!";
+            msg = "You defeated "+enemyChosen.name+" on this battle!<br> Choose another enemy to fight!";
         }
-        $("#battle-msg").html("CONGRATULATIONS!!<br>"+msg);
+        $("#battle-msg").html("CONGRATULATIONS! "+msg);
 
         battleStarted = false;
     }
@@ -154,6 +156,7 @@ $(document).ready(function(){
         divSelection.empty();
         $("#btn-restart").css("display","none");
         $("#btn-attack").css("display","none");
+        $("#btn-attack").removeAttr("disabled");
         $("#battle-msg").css("display","none");
         $("#battle-msg").text("Fight!");
         $("#text-choose-character").text("Choose your character");

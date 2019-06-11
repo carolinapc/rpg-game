@@ -25,7 +25,7 @@ h1 {
     display: grid;
     grid-template-columns: auto auto;
     margin: 10px auto;
-    width: 650px;
+    max-width: 650px;
 }
 .enemies-wrap{
     display: none;
@@ -42,15 +42,72 @@ h1 {
     border-color: 1px solid rgb(190, 83, 83);
 }
 
+.battle-controls{
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    max-width: 650px;
+    margin: 2px auto;
+}
+
+#btn-attack, #btn-restart{
+    padding: 20px;
+    justify-self: left;
+    align-self: center;
+    border-radius: 100px;
+    display: none;
+}
+
+#btn-attack{
+    background-color: darkred;
+    color: white;
+}
+#btn-attack:disabled{
+    background-color: #ccc;
+}
+#btn-attack:disabled:hover{
+    background-color: #ccc;
+}
+
+#btn-restart{
+    background-color: darkgreen;
+    color: white;
+}
+
+
+#btn-attack:hover{
+    background-color: rgb(214, 46, 46);
+    font-weight: bold;
+}
+
+#battle-msg {
+    justify-self: right;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 3px solid #000;
+    text-align: center;
+    
+}
+
 .battle{
     background: url("../images/battle-scene.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: 5px solid #000;
     border-radius: 10px;
     height: 400px;
-    width: 650px;
+    max-width: 650px;
     display: grid;
     margin: 5px auto;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 50px auto;
 }
 
@@ -64,13 +121,6 @@ h1 {
     display: grid;
     grid-template-rows: 20px 30px;
 }
-.battle-hp-center{
-    justify-self: center;
-    align-self: center;
-    color: white;
-    font-size: 24px;
-    padding-bottom: 20px;
-}
 
 .battle-hp-text {
     color: #fff;
@@ -80,7 +130,8 @@ h1 {
 }
 
 .battle-img {
-    height: 300px;
+    height: 250px;
+    margin-top: 50px;
     justify-self: center;
     background-color:unset;
     visibility: hidden;
@@ -94,7 +145,7 @@ h1 {
 
 
 .progress-bar{
-    width: 150px;
+    width: 130px;
     height: 20px;
     border: 1px solid #38c358;
     border-radius: 5px;
@@ -112,50 +163,9 @@ h1 {
     margin:0;
 }
 
-#btn-attack{
-    padding: 20px;
-    width: 100px;
-    height: 100px;
-    justify-self: center;
-    align-self: center;
-    border-radius: 50px;
-    background-color: darkred;
-    color: white;
-    display: none;
-}
 
-#btn-restart{
-    padding: 20px;
-    width: 100px;
-    height: 100px;
-    justify-self: center;
-    align-self: center;
-    border-radius: 50px;
-    background-color: darkgreen;
-    color: white;
-    display: none;
-}
 
-#btn-attack:hover{
-    background-color: rgb(214, 46, 46);
-    font-weight: bold;
-}
 
-#battle-msg {
-    color: #000;
-    font-size: 20px;
-    font-weight: bold;
-    display: none;
-    background-color: #fff;
-    width: 650px;
-    height: 70px;
-    margin: 0 auto;
-    padding: 2px 5px;
-    border-radius: 5px;
-    border: 3px solid #000;
-    text-align: center;
-    
-}
 
 figure{
     flex-wrap: wrap;
@@ -199,7 +209,41 @@ footer{
     text-align: center;
 }
 
+@media screen and (max-width: 500px){
+    img{
+        height: 100px;
+    }
+    .figcaption{
+        font-size: 12px;
+    }
+    #battle-msg{
+        font-size: 14px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+    }
+    
+}
 
-
+@media screen and (max-width: 350px){
+    img{
+        height: 60px;
+    }
+    .figcaption{
+        font-size: 12px;
+    }
+    #battle-msg{
+        font-size: 14px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+    }
+}
 
 

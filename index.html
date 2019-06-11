@@ -26,7 +26,11 @@
             </div>
         </div>
 
-        <span id="battle-msg">Fight!</span>
+        <div class="battle-controls">
+            <button id="btn-attack">Attack</button>
+            <button id="btn-restart">Restart</button>
+            <span id="battle-msg">Fight!</span>
+        </div>
         <div class="battle">
             <div class="battle-hp-left">
                 <span id="battle-user" data-hp="" class="battle-hp-text">Player</span>
@@ -34,8 +38,6 @@
                     <div id="user-hp" class="hp-bar"></div>
                 </div>
             </div>
-            <span class="battle-hp-center">VS</span>
-            
             <div class="battle-hp-right">
                 <span id="battle-enemy" data-hp="" class="battle-hp-text">Enemy</span>
                 <div class="progress-bar">
@@ -43,10 +45,6 @@
                 </div>
             </div>
             <img id="user-character" class="battle-img" src="" alt="user-character">
-            <div class="battle-hp-center">
-                <button id="btn-attack">Attack</button>
-                <button id="btn-restart">Restart</button>
-            </div>
             <img id="enemy-character" class="battle-img" src="" alt="enemy-character">
         </div>
     
