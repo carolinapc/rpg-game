@@ -128,6 +128,10 @@ $(document).ready(function(){
 
     //sets the characters and their atributes on the battle field and prepare to start the battle
     function startBattle(){
+        //check if the bg sound is not playing, then play it.
+        if(audio.played.length == 0)
+            audio.play();
+            
         battleStarted = true;
 
         divCharacteres.css("display","none");
