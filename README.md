@@ -18,6 +18,8 @@ When the defender's HP is reduced to zero or below, the player character can now
 
 The player wins the game by defeating all enemy characters. The player loses the game the game if their character's HP falls to zero or below.
 
+[Play the Game!](https://carolinapc.github.io/unit-4-game/)
+
 ## Design notes
 
 Each character in the game has 3 attributes: Health Points, Attack Power and Counter Attack Power.
