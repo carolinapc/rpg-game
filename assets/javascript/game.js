@@ -24,6 +24,7 @@ $(document).ready(function(){
     var enemiesRemained;
     
 
+    //animates the characters and do something after animation (passed by function)
     function animateCSS(element, animationName, callback) {
         const node = document.querySelector(element);
         node.classList.add('animated', animationName);
@@ -38,6 +39,7 @@ $(document).ready(function(){
         node.addEventListener('animationend', handleAnimationEnd);
     }
 
+    //play audio on the audio object passed
     function playAudio(objAudio,sound){
         objAudio.src = sound;
         objAudio.load();
@@ -70,6 +72,7 @@ $(document).ready(function(){
         enemiesRemained = characters.length-1;
     }
 
+    //build the character figure with its information inside the div passed
     function addCharacterIntoDiv(div, character){
         var figure = $("<figure>");
         figure.attr("id","figure-"+character.id);
@@ -89,7 +92,7 @@ $(document).ready(function(){
 
     }
 
-
+    //add information of the chosen character into the chosen div
     function addChosenData(){
 
         var chosenCaption = $("#fig-caption-"+characterChosen.id);
@@ -109,9 +112,9 @@ $(document).ready(function(){
 
     }
 
+    //updates battle data display (hp and user attack points)
     function updateBattle(){
         //calculates the percentage of HP
-        
         var pcUserHp = (characterChosen.healthPoints / userStartHealth)*100;
         var pcEnemyHp = (enemyChosen.healthPoints / enemyStartHealth)*100;
         
@@ -131,7 +134,7 @@ $(document).ready(function(){
         //check if the bg sound is not playing, then play it.
         if(audio.played.length == 0)
             audio.play();
-            
+
         battleStarted = true;
 
         divCharacteres.css("display","none");
@@ -160,6 +163,7 @@ $(document).ready(function(){
 
     }
 
+    //play animation, audio effects when the game is over (user lost) 
     function gameOver(){
         animateCSS('#enemy-character', 'flip', function(){
             animateCSS('#user-character','fadeOut');
@@ -175,6 +179,7 @@ $(document).ready(function(){
         
     }
 
+    //play animation, audio effetcts and checks the enemies available when user wins the battle 
     function destroyEnemy(){
         
         animateCSS('#user-character', 'flip', function(){
@@ -208,6 +213,7 @@ $(document).ready(function(){
 
     }
     
+    //resets all data to a new game can be ready
     function reset(){
         characterChosen = {};
         enemyChosen = {};
@@ -233,6 +239,7 @@ $(document).ready(function(){
 
     }
 
+    //starts the game
     function start(){
         createCharacters();
         showOptions();
