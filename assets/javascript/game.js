@@ -110,7 +110,8 @@ $(document).ready(function(){
 
     //sets the characters and their atributes on the battle field and prepare to start the battle
     function startBattle(){
-
+        animateCSS('#enemy-character', 'slideInDown');
+        animateCSS('#user-character', 'slideInDown');
         battleStarted = true;
         $("#user-character").attr("src",characterChosen.picture);
         $("#user-character").css("visibility","visible");
