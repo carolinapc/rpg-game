@@ -168,6 +168,7 @@ $(document).ready(function(){
         animateCSS('#enemy-character', 'flip', function(){
             animateCSS('#user-character','fadeOut');
             playAudio(soundEffect,sndEffects.battleLost);
+            playAudio(audio, enemyChosen.sound);
             $("#user-character").css("visibility","hidden");
             $("#user-hp").css("width", "0");
             $("#user-hp").text("0");
