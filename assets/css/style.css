@@ -28,7 +28,7 @@ h3{
 }
 
 
-.characteres{
+.characters{
     display: grid;
     grid-template-columns: auto auto;
     margin: 10px auto;
@@ -58,7 +58,7 @@ h3{
     display: grid;
     grid-template-columns: 90px 1fr;
     max-width: 650px;
-    margin: 2px auto;
+    margin: 20px auto 0 auto;
     background-color: #fff;
     border-radius: 5px;
     border: 3px solid #000;
@@ -220,6 +220,10 @@ img:hover{
 footer{
     margin: 10px auto;
     text-align: center;
+}
+
+.audio{
+    display: none;
 }
 
 @media screen and (max-width: 500px){

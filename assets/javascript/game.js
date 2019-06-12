@@ -4,6 +4,17 @@ $(document).ready(function(){
     var characters = [];
     var divSelection = $(".selection");
     var divEnemies = $(".enemies");
+    var divCharacteres = $(".characters");
+    var audio = document.getElementById("bgsound");
+    var soundEffect = document.getElementById("sound-effect");
+    var sndEffects = {
+        selection: "assets/sounds/click.mp3",
+        attack: "assets/sounds/flyby.mp3",
+        hitted: "assets/sounds/punch.mp3",
+        battleWon: "assets/sounds/tada.mp3",
+        battleLost: "assets/sounds/loser.mp3"
+    };
+    var defaultSound = "assets/sounds/bgsound.mp3";
     var characterChosen = {};
     var enemyChosen = {};
     var battleStarted = false;
@@ -27,6 +38,12 @@ $(document).ready(function(){
         node.addEventListener('animationend', handleAnimationEnd);
     }
 
+    function playAudio(objAudio,sound){
+        objAudio.src = sound;
+        objAudio.load();
+        objAudio.play();     
+    }
+
     //get random value between 2 values
     function getRandomValue(min, max) {
         min = Math.ceil(min);
@@ -43,8 +60,9 @@ $(document).ready(function(){
                 name: charactersName[i].replace("-"," "),
                 healthPoints: getRandomValue(100,300),
                 attackPower: getRandomValue(3,15),
-                counterAttackPower: getRandomValue(10,50),
-                picture: "assets/images/" + charactersName[i].toLocaleLowerCase() + ".png"
+                counterAttackPower: getRandomValue(10,40),
+                picture: "assets/images/" + charactersName[i].toLocaleLowerCase() + ".png",
+                sound: "assets/sounds/" + charactersName[i].toLocaleLowerCase() + ".mp3"
 
             };
             characters.push(character);
@@ -110,9 +128,12 @@ $(document).ready(function(){
 
     //sets the characters and their atributes on the battle field and prepare to start the battle
     function startBattle(){
+        battleStarted = true;
+
+        divCharacteres.css("display","none");
         animateCSS('#enemy-character', 'slideInDown');
         animateCSS('#user-character', 'slideInDown');
-        battleStarted = true;
+        
         $("#user-character").attr("src",characterChosen.picture);
         $("#user-character").css("visibility","visible");
         $("#battle-user").text(characterChosen.name);
@@ -138,6 +159,7 @@ $(document).ready(function(){
     function gameOver(){
         animateCSS('#enemy-character', 'flip', function(){
             animateCSS('#user-character','fadeOut');
+            playAudio(soundEffect,sndEffects.battleLost);
             $("#user-character").css("visibility","hidden");
             $("#user-hp").css("width", "0");
             $("#user-hp").text("0");
@@ -150,8 +172,10 @@ $(document).ready(function(){
     }
 
     function destroyEnemy(){
-        var msg;
+        
         animateCSS('#user-character', 'flip', function(){
+            var msg;
+
             animateCSS('#enemy-character','fadeOut');
             $("#enemy-character").css("visibility","hidden");
             $("#enemy-hp").css("width", "0");
@@ -165,9 +189,13 @@ $(document).ready(function(){
                 msg = "<br>You won the Game!!!";
                 $("#btn-restart").css("display","block");
                 $("#btn-attack").css("display", "none");
+
+                playAudio(audio,characterChosen.sound);
             }
             else{
                 msg = "You defeated "+enemyChosen.name+" on this battle!<br> Choose another enemy to fight!";
+                divCharacteres.css("display","grid");
+                playAudio(soundEffect,sndEffects.battleWon);
             }
             $("#battle-msg").html("CONGRATULATIONS! "+msg);
     
@@ -182,6 +210,7 @@ $(document).ready(function(){
         battleStarted = false;
         divEnemies.empty();
         divSelection.empty();
+        divCharacteres.css("display","grid");
         $("#btn-restart").css("display","none");
         $("#btn-attack").css("display","none");
         $("#btn-attack").removeAttr("disabled");
@@ -195,6 +224,8 @@ $(document).ready(function(){
         $("#battle-enemy").text("Enemy");
         $("#enemy-hp").animate({ width: "0" });
         $("#user-hp").animate({ width: "0" });
+        playAudio(audio,defaultSound);
+
 
     }
 
@@ -204,7 +235,7 @@ $(document).ready(function(){
     }
 
 
-    //place all characteres on the Selection div
+    //place all characters on the Selection div
     function showOptions (){
         for(var i=0; i < characters.length; i++){
             addCharacterIntoDiv(divSelection,characters[i]);
@@ -217,6 +248,8 @@ $(document).ready(function(){
         //makes sure that user choose once and that an img tag was clicked
         if(Object.keys(characterChosen).length === 0 && event.target.nodeName == "IMG")
         {
+            playAudio(soundEffect,sndEffects.selection);
+
             var choice = event.target.id;
 
             characterChosen = characters[choice]; //assign the character chosen into the global variable
@@ -248,6 +281,8 @@ $(document).ready(function(){
         //makes sure that an img tag was clicked
         if(event.target.nodeName == "IMG" && !battleStarted)
         {
+            playAudio(soundEffect,sndEffects.selection);
+
             var choice = event.target.id;
 
             enemyChosen = characters[choice]; //assign the character chosen into the global variable
@@ -265,8 +300,11 @@ $(document).ready(function(){
     //when the user attacks the enemy
     $("#btn-attack").click(function(){
         $(this).attr("disabled","true");
+        playAudio(soundEffect,sndEffects.attack);
+
         //animation: user attacks the enemy (animation)
         animateCSS('#user-character', 'flip', function(){
+            playAudio(soundEffect,sndEffects.hitted);
             //the enemy loses health
             enemyChosen.healthPoints -= characterChosen.attackPower;
             
@@ -284,10 +322,11 @@ $(document).ready(function(){
             else{
                 //animation: enemy shakes 
                 animateCSS('#enemy-character', 'shake', function(){
+                    playAudio(soundEffect,sndEffects.attack);
                     //animation: enemy counter-attack
                     animateCSS('#enemy-character', 'flip', function(){
                         animateCSS('#user-character', 'shake'); 
-
+                        playAudio(soundEffect,sndEffects.hitted);
                         //the user loses health with the counter attack of the enemy
                         characterChosen.healthPoints -= enemyChosen.counterAttackPower;
 
@@ -304,17 +343,9 @@ $(document).ready(function(){
 
                     });
                     
-
                 });
-
             }            
-    
         });
-    
-       
-        
-        
-
     });
     
     $("#btn-restart").click(function(){
