@@ -37,6 +37,11 @@ h1 {
     align-items: center;
 }
 
+.enemies{
+    border-radius: 10px;
+    background-color: rgb(247, 151, 151);
+    padding-top: 2px;
+}
 
 .enemies figure {
     border-color: 1px solid rgb(190, 83, 83);
@@ -187,9 +192,9 @@ img{
     cursor: pointer;
 }
 img:hover{
-    background-color: #fdfdac;
+    background-color: lightyellow;
     border-color: 1px solid #000 ;
-    border-radius: 20px;
+    border-radius: 8px;
 }
 
 .chosen {
@@ -213,7 +218,7 @@ footer{
     img{
         height: 100px;
     }
-    .figcaption{
+    figcaption{
         font-size: 12px;
     }
     #battle-msg{
@@ -232,7 +237,7 @@ footer{
     img{
         height: 60px;
     }
-    .figcaption{
+    figcaption{
         font-size: 12px;
     }
     #battle-msg{
