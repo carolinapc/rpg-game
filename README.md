@@ -18,7 +18,7 @@ When the defender's HP is reduced to zero or below, the player character can now
 
 The player wins the game by defeating all enemy characters. The player loses the game the game if their character's HP falls to zero or below.
 
-[Play the Game!](https://carolinapc.github.io/unit-4-game/)
+[Play the Game!](https://carolinapc.github.io/rpg-game/)
 
 ![gameview](https://carolinapc.github.io/assets/images/rpggame.png)
 
