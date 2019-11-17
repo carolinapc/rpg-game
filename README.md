@@ -39,5 +39,6 @@ The values of Health Points, Attack Power and Counter Attack Power changing ever
 ## Technologies Used
 
 - Javascript
+- jQuery
 - CSS
 
