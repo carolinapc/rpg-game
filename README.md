@@ -20,6 +20,8 @@ The player wins the game by defeating all enemy characters. The player loses the
 
 [Play the Game!](https://carolinapc.github.io/unit-4-game/)
 
+![gameview](https://carolinapc.github.io/assets/images/rpggame.png)
+
 ## Design notes
 
 Each character in the game has 3 attributes: Health Points, Attack Power and Counter Attack Power.
@@ -34,4 +36,3 @@ No characters in the game can heal or recover Health Points.
 
 The values of Health Points, Attack Power and Counter Attack Power changing every time the game starts.
 
-![gameview](https://carolinapc.github.io/assets/images/rpggame.png)
