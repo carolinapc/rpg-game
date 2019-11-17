@@ -36,3 +36,8 @@ No characters in the game can heal or recover Health Points.
 
 The values of Health Points, Attack Power and Counter Attack Power changing every time the game starts.
 
+## Technologies Used
+
+- Javascript
+- CSS
+
