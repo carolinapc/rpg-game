@@ -33,3 +33,5 @@ The Health Points, Attack Power and Counter Attack Power of each character are d
 No characters in the game can heal or recover Health Points. 
 
 The values of Health Points, Attack Power and Counter Attack Power changing every time the game starts.
+
+![gameview](https://carolinapc.github.io/assets/images/rpggame.png)
